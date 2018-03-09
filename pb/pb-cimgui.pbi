@@ -722,17 +722,8 @@ Get_UI_Lib_Func(igBullet,())                                            ; void
 ;- Widgets: Main
 Get_UI_Lib_Func(igButton,(label.s, W.f=0.0, H.f=0.0)); bool ; ; ImVec2
 Get_UI_Lib_Func(igSmallButton,(label.s))           ; bool
-Get_UI_Lib_Func(igInvisibleButton,(*str_id, W.f=0.0, H.f=0.0)); bool ; ImVec2
-
-;TODO: 
-;Get_UI_Lib_Func(igImage,(user_texture_id.i, size.p-variant, uv0.p-variant, uv1.p-variant, tint_col.p-variant, border_col.p-variant)); void ; ImVec2 - col ImVec4
-;-  Testing
-
-;CIMGUI_API void igImage(ImTextureID user_texture_id, CONST struct ImVec2 size, CONST struct ImVec2 uv0, CONST struct ImVec2 uv1, CONST struct ImVec4 tint_col, CONST struct ImVec4 border_col);
-
-;TODO: igImage - doesn't work, doesn't seem like they get drawn at all
+Get_UI_Lib_Func(igInvisibleButton,(*str_id, W.f=0.0, H.f=0.0)); bool ; ImVec2 
 Get_UI_Lib_Func(igImage,(textureid.l, W.f, H.f, uv0X.f=0.0, uv0Y.f=0.0, uv1X.f=1.0, uv1Y.f=1.0,   tintR.f=255.0,tintG.f=255.0,tintB.f=255.0,tintA.f=255.0, border_colR.f=0.0,border_colG.f=0.0,border_colB.f=0.0,border_colA.f=0.0)); void ; ImVec2 - col ImVec4
-;Get_UI_Lib_Func(igImage,(user_texture_id.l)); void ; ImVec2 - col ImVec4
 Get_UI_Lib_Func(igImageButton,(user_texture_id.l, W.f, H.f, topleftX.f=0.0, topleftY.f=0.0, bottom_rightX.f=1.0, bottom_rightY.f=1.0, frame_padding.l=0, bordercolorR.f=0.0,bordercolorG.f=0.0,bordercolorB.f=0.0,bordercolorA.f=0.0, tintR.f=0.0,tintG.f=0.0,tintB.f=0.0,tintA.f=0.0)); bool
 Get_UI_Lib_Func(igCheckbox,(label.s, *v))                                                                                                              ; bool ; v is bool
 Get_UI_Lib_Func(igCheckboxFlags,(label.s, *flags, flags_value.l))                                                                                      ; bool
@@ -949,9 +940,9 @@ Get_UI_Lib_Func(igGetMousePos, (*pOut_ImVec2)); void
 ; Get_UI_Lib_Func(igCaptureMouseFromApp(bool capture); void
 ; 
 ;- Helpers functions To access functions pointers in ImGui::GetIO()
-; Get_UI_Lib_Func(*igMemAlloc(size_t sz); void
-; Get_UI_Lib_Func(igMemFree(void *ptr); void
-; Get_UI_Lib_Func(char *igGetClipboardText(); CONST
+Get_UI_Lib_Func(igMemAlloc, (size_t.i)); void*
+Get_UI_Lib_Func(igMemFree, (*ptr)); void
+Get_UI_Lib_Func(igGetClipboardText, ()); CONST char*
 Get_UI_Lib_Func(igSetClipboardText, (text.s)); void
 ; 
 ; // Internal state access - If you want To share ImGui state between modules (e.g. DLL) Or allocate it yourself
@@ -1178,7 +1169,7 @@ Debug "pb-cimgui: Loaded " + LibImGui_API_Coverage + " Functions"
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
 ; ExecutableFormat = Console
-; CursorPosition = 5
+; CursorPosition = 942
 ; Folding = --
-; Markers = 353,736
+; Markers = 353,727
 ; EnableXP

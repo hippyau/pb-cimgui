@@ -2,6 +2,29 @@
 IncludeFile "pb-cimgui.pbi"
 
 
+; workaround rollover of 32bit ElapsedMilliseconds() for 64bit machines
+CompilerIf #PB_Compiler_Processor = #PB_Processor_x86
+
+    Procedure.q ElapsedMilliseconds_64()
+        Static ElapsedMilliseconds_64_oldValue.q = 0                ; value of last call
+        Static ElapsedMilliseconds_64_overflow.q = 0                ; how many overflows occured
+        Protected current_ms.q = ElapsedMilliseconds() & $FFFFFFFF  ; get new value as unsigned number
+        If ElapsedMilliseconds_64_oldValue > current_ms             ; If old value is greater than new value
+            ElapsedMilliseconds_64_overflow + 1                     ;     increment overflow by 1
+        EndIf
+        ElapsedMilliseconds_64_oldValue = current_ms
+        ProcedureReturn current_ms + ElapsedMilliseconds_64_overflow * $FFFFFFFF ; return current value + overflows
+    EndProcedure
+
+    Macro ElapsedMilliseconds()
+        ElapsedMilliseconds_64()
+    EndMacro
+      
+CompilerEndIf
+
+
+
+
 ;  Testing
 Structure ImClr
   R.f
@@ -18,7 +41,6 @@ EndMacro
 
 
 #FONT_SIZE = 18.0
-
 
 
 
@@ -59,11 +81,11 @@ ProcedureCDLL LoadResources()
 
 
 ; When this returns, the program is over, we release any PB resources and exit
-; TODO: doesn't work properly
 ProcedureCDLL UnloadResources()
   
-  ; cleanup whatever
-  If _ReleaseImage(*texID) = 0
+  ; cleanup whatever here...
+  
+  If Not _ReleaseImage(*texID)
     Debug "Unable to release texture"
   EndIf
   
@@ -113,7 +135,7 @@ ProcedureCDLL MainLoop()
   
   ; counting FPS 
   Protected fcount = igGetFrameCount()
-  Static em.q = 0, fps = 0, ofcount = 0, timetick = 0 
+  Static em.q = 0, fps = 0, ofcount = 0, timetick.q = 0 
   em = ElapsedMilliseconds()
   If em >= timetick + 1000
     timetick = em 
@@ -259,8 +281,8 @@ EndDataSection
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
-; CursorPosition = 23
-; Folding = --
+; CursorPosition = 25
+; Folding = +-
 ; EnableThread
 ; EnableXP
 ; Executable = pbtest.exe
