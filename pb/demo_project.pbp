@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.40 LTS (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="0" name="pb-cimgui demo project"/>
+  </section>
+  <section name="data">
+    <explorer view="..\..\..\c2pb\" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2018-03-09 19:39" user="Rowan" host="ALIEN13"/>
+  </section>
+  <section name="files">
+    <file name="main.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="b081317b606cf548af24d6ccf6d0ba45"/>
+    </file>
+    <file name="pb-cimgui.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="5bc047643f1b3855be9abc286ce7dd0d"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Default Target" enabled="1" default="1">
+      <inputfile value="main.pb"/>
+      <outputfile value="demo.exe"/>
+      <options thread="1" xpskin="1" debug="1"/>
+      <format exe="console" cpu="0"/>
+    </target>
+  </section>
+</project>
