@@ -15,6 +15,13 @@ This library is intended as a intermediate layer to be able to use imgui from ot
 
 Usage:
 
-Use Visual Studio 2015 Community Edition to build the pb-cimgui.dll
-Use the pb-cimgui.pbi file in PureBasic to import the DLL functions.
+0)  Use Visual Studio 2015 Community Edition or whatever to build pb-cimgui.dll from the pb-cimgui.sln solution.
+
+1)  Include the pb-cimgui.pbi file from the pb directory in PureBasic 5.40 into your project to import DLL functions.  See main.pb for an example usage in PB.
+
+
+Notes:
+* currently cimgui wrapper is based on version [1.53 of imgui](https://github.com/ocornut/imgui/releases/tag/v1.53)
+
+
 
