@@ -11,7 +11,6 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -240,3 +239,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/cimgui/Debug/pb-cimgui.exp
+/cimgui/Debug/vc140.idb
+/cimgui/Debug/pb-cimgui.tlog
