@@ -2,7 +2,8 @@
 IncludeFile "pb-cimgui.pbi"
 
 
-; workaround rollover of 32bit ElapsedMilliseconds() for 64bit machines
+; workaround rollover of 32-bit ElapsedMilliseconds() for 64-bit machines
+; Only required for 32-bit PB on 64-bit machines.
 CompilerIf #PB_Compiler_Processor = #PB_Processor_x86
 
     Procedure.q ElapsedMilliseconds_64()
@@ -175,6 +176,7 @@ ProcedureCDLL MainLoop()
   igNewLine()
   igCheckbox("Show Demo Window?", @showdemowin)
   If showdemowin
+    igBullet()
     igText("We are showing the demo window!")  
     igShowDemoWindow(@show_demo_window)  
   Else
@@ -210,15 +212,19 @@ ProcedureCDLL MainLoop()
   EndIf
   
   ; coloured text
-  igTextColored(clr(0)/255,clr(1)/255,clr(2)/255,0.0+clr(3)/255,"Hello World")
+  igTextColored(clr(0),clr(1),clr(2),clr(3),"Hello World")
   
   ; colour picker
-  igColorPicker3("Colour",@clr(0), #ImGuiColorEditFlags_PickerHueWheel)
+  igColorPicker4("Colour",@clr(0), #ImGuiColorEditFlags_RGB | #ImGuiColorEditFlags_AlphaBar | #ImGuiColorEditFlags_PickerHueWheel)
+  
+  igNewLine()
+  
+  igText("Colour: ") : igSameLine(60,0) : igSliderFloat4("R G B A",@clr(0),0.0,1.0, "%.2f")
+  
   
   ; Test Drag
   Static drag.f
-  igDragFloat("Drag", @drag,0.33,0.0,255.0,"%3.2f",1)
-  igText("Colour: ") : igSameLine(60,0) : igDragFloat4("R G B A",@clr(0),0.33,0,255,"%.0f")
+  igDragFloat("Drag", @drag, 0.33, 0.0, 255.0, "%3.2f", 1)
   
   igNewLine()
   ; line editor
@@ -281,7 +287,7 @@ EndDataSection
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
-; CursorPosition = 25
+; CursorPosition = 220
 ; Folding = +-
 ; EnableThread
 ; EnableXP
